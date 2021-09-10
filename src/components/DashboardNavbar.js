@@ -11,12 +11,14 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import InputIcon from '@material-ui/icons/Input';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Logo from './Logo';
+import { useDispatch } from 'react-redux'
+import { logOut } from 'src/store/actions/authAction';
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
-  const [notifications] = useState([]);
-
+  const [notifications] = useState([1,2,2,3]);
+  const dispatch = useDispatch()
   return (
     <AppBar
       elevation={0}
@@ -31,14 +33,14 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
           <IconButton color="inherit" size="large">
             <Badge
               badgeContent={notifications.length}
-              color="primary"
-              variant="dot"
+              color="secondary"
+              variant="standard"
             >
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit" size="large">
-            <InputIcon />
+          <IconButton color="inherit" onClick={() => dispatch(logOut())}>
+            <ExitToAppIcon />
           </IconButton>
         </Hidden>
         <Hidden lgUp>

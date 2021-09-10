@@ -7,33 +7,36 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import ProductList from './pages/ProductList';
-import Register from './pages/Register';
+import User from './pages/User';
 import Settings from './pages/Settings';
 
-const routes = [
+const auth = localStorage.getItem("isAuth")
+
+const ProtectRoute = [
   {
-    path: 'app',
+    path: '/',
     element: <DashboardLayout />,
     children: [
-      { path: 'account', element: <Account /> },
+      { path: 'user', element: <User /> },
       { path: 'customers', element: <CustomerList /> },
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
-      { path: 'settings', element: <Settings /> },
+      { path: 'setting', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
+];
+
+const PublicRoute = [
   {
     path: '/',
     element: <MainLayout />,
     children: [
       { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> },
       { path: '404', element: <NotFound /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
-];
+]
 
-export default routes;
+export default auth ? ProtectRoute : PublicRoute;

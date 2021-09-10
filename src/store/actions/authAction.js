@@ -22,7 +22,7 @@ export const login = (userData, navigate) => async (dispatch) => {
       type: t.SET_ERROR_AUTH,
       payload: err,
     }));
-  navigate("/app/dashboard")
+  navigate("/dashboard")
   window.location.reload();
 }
 
